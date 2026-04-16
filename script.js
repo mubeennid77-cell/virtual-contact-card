@@ -3,7 +3,8 @@ function downloadVCard() {
 VERSION:3.0
 FN:NAMRAZ P.N
 ORG:Dune Traders
-TITLE:Sales Manager – Valves & Instrumentation
+Name:NAMRAZ P.N
+Role:Sales Manager – Valves & Instrumentation
 TEL:+97433221297
 EMAIL:namraz.nazer@dunetraders.com
 URL:https://www.dunetraders.com
