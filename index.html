@@ -1,28 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Namraz P.N - Contact Card</title>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUNE Contact Card</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+.card{
+width:430px;
+max-width:100%;
+background:#ffffff;
+border-radius:28px;
+padding:35px 28px;
+box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+
+.logo{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo img{
+width:180px;
+max-width:100%;
+}
+
+.name{
+text-align:center;
+font-size:38px;
+font-weight:800;
+color:#111;
+margin-top:10px;
+}
+
+.title{
+text-align:center;
+font-size:24px;
+color:#666;
+margin-bottom:35px;
+}
+
+.row{
+display:flex;
+gap:18px;
+align-items:flex-start;
+padding:15px;
+margin-bottom:14px;
+border-radius:16px;
+text-decoration:none;
+transition:0.3s;
+}
+
+.row:hover{
+background:#fff3e8;
+transform:translateY(-2px);
+}
+
+.row i{
+font-size:28px;
+color:#ff7a00;
+width:32px;
+margin-top:4px;
+}
+
+.row span{
+display:block;
+font-size:16px;
+font-weight:700;
+color:#111;
+}
+
+.row p{
+margin-top:5px;
+font-size:15px;
+color:#555;
+line-height:1.5;
+}
+
+.btn{
+display:block;
+width:100%;
+border:none;
+background:#ff7a00;
+color:#fff;
+padding:18px;
+font-size:20px;
+font-weight:700;
+border-radius:16px;
+cursor:pointer;
+margin-top:18px;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#e86800;
+}
+
+.btn i{
+margin-right:10px;
+}
+
+@media(max-width:480px){
+.name{
+font-size:30px;
+}
+.title{
+font-size:20px;
+}
+.card{
+padding:28px 20px;
+}
+}
+</style>
 </head>
+
 <body>
 
 <div class="card">
-  <h1>NAMRAZ P.N</h1>
-  <p class="role">Sales Manager – Valves & Instrumentation</p>
 
-  <div class="info">
-    <p>📞 <a href="tel:+97433221297">+974 3322 1297</a></p>
-    <p>✉️ <a href="mailto:namraz.nazer@dunetraders.com">namraz.nazer@dunetraders.com</a></p>
-    <p>🌐 <a href="https://www.dunetraders.com" target="_blank">www.dunetraders.com</a></p>
-    <p>📍 Building No.15, Zone 14, Street 339, Doha-Qatar</p>
-    <p>P.O. Box: 4413</p>
-  </div>
-
-  <button onclick="downloadVCard()">Add to Contacts</button>
+<div class="logo">
+<img src="logo.jpg" alt="DUNE Logo">
 </div>
 
-<script src="script.js"></script>
+<div class="name">NAMRAZ P.N</div>
+<div class="title">CEO</div>
+
+<a class="row" href="tel:+97433221297">
+<i class="fas fa-phone"></i>
+<div>
+<span>Mobile Number</span>
+<p>+974 3322 1297</p>
+</div>
+</a>
+
+<a class="row" href="mailto:namraz.nazer@dunetraders.com">
+<i class="fas fa-envelope"></i>
+<div>
+<span>Email Address</span>
+<p>namraz.nazer@dunetraders.com</p>
+</div>
+</a>
+
+<a class="row" href="https://www.dunetraders.com" target="_blank">
+<i class="fas fa-globe"></i>
+<div>
+<span>Website Address</span>
+<p>www.dunetraders.com</p>
+</div>
+</a>
+
+<a class="row" href="https://maps.google.com/?q=Building No.15 Zone 14 Street 339 Doha Qatar" target="_blank">
+<i class="fas fa-location-dot"></i>
+<div>
+<span>Address</span>
+<p>Building No.15, Zone 14, Street 339,<br>Doha-Qatar<br>P.O. Box: 4413</p>
+</div>
+</a>
+
+<a class="row" href="https://wa.me/97433221297" target="_blank">
+<i class="fab fa-whatsapp"></i>
+<div>
+<span>WhatsApp</span>
+<p>Chat Now</p>
+</div>
+</a>
+
+<button class="btn" onclick="saveContact()">
+<i class="fas fa-user-plus"></i> ADD TO CONTACT
+</button>
+
+</div>
+
+<script>
+function saveContact(){
+
+const vcard =
+`BEGIN:VCARD
+VERSION:3.0
+FN:NAMRAZ P.N
+ORG:DUNE TRADERS
+TITLE:CEO
+TEL;TYPE=CELL:+97433221297
+EMAIL:namraz.nazer@dunetraders.com
+URL:https://www.dunetraders.com
+ADR:;;Building No.15, Zone 14, Street 339, Doha-Qatar;;;Qatar
+END:VCARD`;
+
+const blob = new Blob([vcard], {type:'text/vcard'});
+const url = window.URL.createObjectURL(blob);
+
+const a = document.createElement('a');
+a.href = url;
+a.download = 'NAMRAZ-PN.vcf';
+a.click();
+
+window.URL.revokeObjectURL(url);
+}
+</script>
+
 </body>
 </html>
